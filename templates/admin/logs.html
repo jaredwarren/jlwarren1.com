@@ -1,0 +1,32 @@
+{{define "head"}}
+<script type="text/javascript">
+// use an anonymous function
+$(function() {
+	document.querySelector("#clearLogs").onclick = function() {
+		if (window.confirm("Are you sure you want to clear the logs?")) {
+			$.ajax({
+				method: "DELETE",
+				url: "/admin/logs/"
+			}).done(function(msg) {
+				window.location.reload();
+			});
+
+		}
+		return false;
+	};
+});
+</script>
+{{end}}
+
+{{define "body"}}
+<div class="page-content">
+	<div class="nav">
+		<a class="link-button" href="/BlazePrinter/">Home</a> / 
+		<a class="link-button" href="/admin/">Admin</a>
+	</div>
+	<h2>Logs</h2>
+	<pre>{{.Logs}}</pre>
+	<br>
+	<button id="clearLogs">Clear Logs</button>
+</div>
+{{end}}

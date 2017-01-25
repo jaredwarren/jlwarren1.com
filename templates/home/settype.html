@@ -1,0 +1,65 @@
+{{define "head"}}
+<script type="text/javascript">
+// use an anonymous function
+$(function() {
+
+	$(document).delegate('input[type=radio]', 'change', function(e) {
+		var $me = $(this);
+		$.ajax({
+			method: 'PUT',
+			url: '/printer/type/'+$me.prop('name')+'/'+$me.val(),
+			async: false,
+		}).done(function(msg) {
+			
+		}).fail(function(msg) {
+			console.error(msg);
+			alert("Failed to set Type");
+		});
+	});
+});
+
+</script>
+{{end}}
+
+{{define "body"}}
+<div>
+	<fieldset class="page-content">
+		<div>
+			<a class="btn secondary" href="/" ><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</a>
+		</div> 
+		<h3>Printer Type</h3>
+		<table>
+			{{range $index, $element := .Printers}}
+				<tr class="form-row">
+					<td>
+						<label>{{$element.Printer}}</label>
+					</td>
+					<td>
+						<label>
+							<input class="input-2x1" type="radio" name="{{$element.Printer}}" value="2x1" {{if eq $element.Type "2x1" }}checked{{end}}> 2x1
+						</label>
+					</td>
+					<td>
+						<label>
+							<input class="input-4x6" type="radio" name="{{$element.Printer}}" value="4x6" {{if eq $element.Type "4x6" }}checked{{end}}> 4x6
+						</label>
+					</td>
+					<td>
+						<label>
+							<input class="input-4x6" type="radio" name="{{$element.Printer}}" value="none" {{if eq $element.Type "none" }}checked{{end}} {{if eq $element.Type "" }}checked{{end}} {{if eq $element.Type "unknown" }}checked{{end}}> none
+						</label>
+					</td>
+				</tr>
+			{{else}}
+				<div>No Printers Found</div>
+			{{end}}
+		</table>
+		<!-- <div>
+			<button id="save2x1"><i class="fa fa-save" aria-hidden="true"></i> Save</button>
+		</div>  -->
+	</fieldset>
+
+	
+	<div class="note">System Default Printer - {{.SystemDefaultPrinter}}</div>
+</div>
+{{end}}

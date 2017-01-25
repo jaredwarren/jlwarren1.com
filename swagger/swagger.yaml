@@ -70,9 +70,30 @@ paths:
       summary: dashboard home
       tags:
       - home
-  /favicon.ico:
+  /bower_components/{filename}:
     get:
-      operationId: home#/favicon.ico
+      operationId: home#/bower_components/*filename
+      parameters:
+      - description: Relative file path
+        in: path
+        name: filename
+        required: true
+        type: string
+      responses:
+        "200":
+          description: File downloaded
+          schema:
+            type: file
+        "404":
+          description: File not found
+          schema:
+            $ref: '#/definitions/error'
+      schemes:
+      - https
+      summary: Download static/bower_components/
+  /images/favicon.ico:
+    get:
+      operationId: home#/images/favicon.ico
       responses:
         "200":
           description: File downloaded
@@ -80,11 +101,33 @@ paths:
             type: file
       schemes:
       - https
-      summary: Download static/favicon.ico
-  /settype:
+      summary: Download static/images/favicon.ico
+  /index:
+    get:
+      operationId: home#/index
+      responses:
+        "200":
+          description: File downloaded
+          schema:
+            type: file
+      schemes:
+      - https
+      summary: Download static/index.html
+  /index.html:
+    get:
+      operationId: home#/index.html
+      responses:
+        "200":
+          description: File downloaded
+          schema:
+            type: file
+      schemes:
+      - https
+      summary: Download static/index.html
+  /profile:
     get:
       description: Set Printer Type
-      operationId: home#setType
+      operationId: home#profile
       responses:
         "200":
           description: OK
@@ -94,9 +137,30 @@ paths:
             $ref: '#/definitions/error'
       schemes:
       - https
-      summary: setType home
+      summary: profile home
       tags:
       - home
+  /src/{filename}:
+    get:
+      operationId: home#/src/*filename
+      parameters:
+      - description: Relative file path
+        in: path
+        name: filename
+        required: true
+        type: string
+      responses:
+        "200":
+          description: File downloaded
+          schema:
+            type: file
+        "404":
+          description: File not found
+          schema:
+            $ref: '#/definitions/error'
+      schemes:
+      - https
+      summary: Download static/src/
   /static/{filename}:
     get:
       operationId: home#/static/*filename

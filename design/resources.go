@@ -16,21 +16,18 @@ var _ = Resource("home", func() {
 		Response(InternalServerError, ErrorMedia)
 	})
 
-	Action("setType", func() {
-		Description("Set Printer Type")
-		Routing(GET("/settype"))
-		Response(OK, "text/html")
-		Response(InternalServerError, ErrorMedia)
-	})
-
 	Action("profile", func() {
 		Description("Set Printer Type")
-		Routing(GET("/settype"))
+		Routing(GET("/profile"))
 		Response(OK, "text/html")
 		Response(InternalServerError, ErrorMedia)
 	})
 
-	Files("/favicon.ico", "static/favicon.ico")
+	Files("/index.html", "static/index.html")
+	Files("/index", "static/index.html")
+	Files("/images/favicon.ico", "static/images/favicon.ico")
 	Files("/static/*filename", "static/")
+	Files("/src/*filename", "static/src/")
+	Files("/bower_components/*filename", "static/bower_components/")
 
 })

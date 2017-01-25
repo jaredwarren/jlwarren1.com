@@ -24,11 +24,6 @@ type (
 		PrettyPrint bool
 	}
 
-	// SetTypeHomeCommand is the command line data structure for the setType action of home
-	SetTypeHomeCommand struct {
-		PrettyPrint bool
-	}
-
 	// DownloadCommand is the command line data structure for the download command.
 	DownloadCommand struct {
 		// OutFile is the path to the download output file.
@@ -59,26 +54,12 @@ func RegisterCommands(app *cobra.Command, c *client.Client) {
 	}
 	tmp2 := new(ProfileHomeCommand)
 	sub = &cobra.Command{
-		Use:   `home ["/settype"]`,
+		Use:   `home ["/profile"]`,
 		Short: ``,
 		RunE:  func(cmd *cobra.Command, args []string) error { return tmp2.Run(c, args) },
 	}
 	tmp2.RegisterFlags(sub, c)
 	sub.PersistentFlags().BoolVar(&tmp2.PrettyPrint, "pp", false, "Pretty print response body")
-	command.AddCommand(sub)
-	app.AddCommand(command)
-	command = &cobra.Command{
-		Use:   "setType",
-		Short: `Set Printer Type`,
-	}
-	tmp3 := new(SetTypeHomeCommand)
-	sub = &cobra.Command{
-		Use:   `home ["/settype"]`,
-		Short: ``,
-		RunE:  func(cmd *cobra.Command, args []string) error { return tmp3.Run(c, args) },
-	}
-	tmp3.RegisterFlags(sub, c)
-	sub.PersistentFlags().BoolVar(&tmp3.PrettyPrint, "pp", false, "Pretty print response body")
 	command.AddCommand(sub)
 	app.AddCommand(command)
 
@@ -147,16 +128,46 @@ func (cmd *DownloadCommand) Run(c *client.Client, args []string) error {
 	if rpath[0] != '/' {
 		rpath = "/" + rpath
 	}
-	if rpath == "/favicon.ico" {
+	if rpath == "/images/favicon.ico" {
 		fnf = c.DownloadFaviconIco
 		if outfile == "" {
 			outfile = "favicon.ico"
 		}
 		goto found
 	}
+	if rpath == "/index.html" {
+		fnf = c.DownloadIndexHTML
+		if outfile == "" {
+			outfile = "index.html"
+		}
+		goto found
+	}
+	if rpath == "/index" {
+		fnf = c.DownloadIndex
+		if outfile == "" {
+			outfile = "index.html"
+		}
+		goto found
+	}
 	if strings.HasPrefix(rpath, "/static/") {
 		fnd = c.DownloadStatic
 		rpath = rpath[8:]
+		if outfile == "" {
+			_, outfile = path.Split(rpath)
+		}
+		goto found
+	}
+	if strings.HasPrefix(rpath, "/bower_components/") {
+		fnd = c.DownloadBowerComponents
+		rpath = rpath[18:]
+		if outfile == "" {
+			_, outfile = path.Split(rpath)
+		}
+		goto found
+	}
+	if strings.HasPrefix(rpath, "/src/") {
+		fnd = c.DownloadSrc
+		rpath = rpath[5:]
 		if outfile == "" {
 			_, outfile = path.Split(rpath)
 		}
@@ -208,7 +219,7 @@ func (cmd *ProfileHomeCommand) Run(c *client.Client, args []string) error {
 	if len(args) > 0 {
 		path = args[0]
 	} else {
-		path = "/settype"
+		path = "/profile"
 	}
 	logger := goa.NewLogger(log.New(os.Stderr, "", log.LstdFlags))
 	ctx := goa.WithLogger(context.Background(), logger)
@@ -224,28 +235,4 @@ func (cmd *ProfileHomeCommand) Run(c *client.Client, args []string) error {
 
 // RegisterFlags registers the command flags with the command line.
 func (cmd *ProfileHomeCommand) RegisterFlags(cc *cobra.Command, c *client.Client) {
-}
-
-// Run makes the HTTP request corresponding to the SetTypeHomeCommand command.
-func (cmd *SetTypeHomeCommand) Run(c *client.Client, args []string) error {
-	var path string
-	if len(args) > 0 {
-		path = args[0]
-	} else {
-		path = "/settype"
-	}
-	logger := goa.NewLogger(log.New(os.Stderr, "", log.LstdFlags))
-	ctx := goa.WithLogger(context.Background(), logger)
-	resp, err := c.SetTypeHome(ctx, path)
-	if err != nil {
-		goa.LogError(ctx, "failed", "err", err)
-		return err
-	}
-
-	goaclient.HandleResponse(c.Client, resp, cmd.PrettyPrint)
-	return nil
-}
-
-// RegisterFlags registers the command flags with the command line.
-func (cmd *SetTypeHomeCommand) RegisterFlags(cc *cobra.Command, c *client.Client) {
 }

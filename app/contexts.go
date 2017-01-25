@@ -80,35 +80,3 @@ func (ctx *ProfileHomeContext) InternalServerError(r error) error {
 	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.goa.error")
 	return ctx.ResponseData.Service.Send(ctx.Context, 500, r)
 }
-
-// SetTypeHomeContext provides the home setType action context.
-type SetTypeHomeContext struct {
-	context.Context
-	*goa.ResponseData
-	*goa.RequestData
-}
-
-// NewSetTypeHomeContext parses the incoming request URL and body, performs validations and creates the
-// context used by the home controller setType action.
-func NewSetTypeHomeContext(ctx context.Context, service *goa.Service) (*SetTypeHomeContext, error) {
-	var err error
-	resp := goa.ContextResponse(ctx)
-	resp.Service = service
-	req := goa.ContextRequest(ctx)
-	rctx := SetTypeHomeContext{Context: ctx, ResponseData: resp, RequestData: req}
-	return &rctx, err
-}
-
-// OK sends a HTTP response with status code 200.
-func (ctx *SetTypeHomeContext) OK(resp []byte) error {
-	ctx.ResponseData.Header().Set("Content-Type", "text/html")
-	ctx.ResponseData.WriteHeader(200)
-	_, err := ctx.ResponseData.Write(resp)
-	return err
-}
-
-// InternalServerError sends a HTTP response with status code 500.
-func (ctx *SetTypeHomeContext) InternalServerError(r error) error {
-	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.goa.error")
-	return ctx.ResponseData.Service.Send(ctx.Context, 500, r)
-}

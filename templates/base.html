@@ -1,0 +1,25 @@
+{{define "base"}}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>{{.Title}}</title>
+
+    <link rel="stylesheet" type="text/css" href="/static/theme.css">
+    <script src='/static/js/jquery-3.0.0.min.js' type='text/javascript'></script>
+    <script src='/static/js/printer.js' type='text/javascript'></script>
+    <script src='/static/js/scale.js' type='text/javascript'></script>
+
+    <link rel="stylesheet" href="https://mclth.com/inc/font-awesome/css/font-awesome.min.css"> {{template "head" .}}
+</head>
+
+<body>
+    <div class="title-bar">
+        <!--<img src="/static/bhq-logo.png">-->
+    </div>
+    {{template "body" .}}
+</body>
+
+</html>
+{{end}}

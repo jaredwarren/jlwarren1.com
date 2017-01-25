@@ -1,9 +1,20 @@
 package main
 
 import (
+	"bytes"
+	"fmt"
+	"html/template"
+
 	"github.com/goadesign/goa"
 	"github.com/jaredwarren/jlwarren1.com/app"
 )
+
+var templates = make(map[string]*template.Template)
+var funcMap = template.FuncMap{
+/*"title":  strings.Title,
+"add":    add,
+"tobool": tobool,*/
+}
 
 // HomeController implements the home resource.
 type HomeController struct {
@@ -19,7 +30,17 @@ func NewHomeController(service *goa.Service) *HomeController {
 func (c *HomeController) Dashboard(ctx *app.DashboardHomeContext) error {
 	// HomeController_Dashboard: start_implement
 
-	// Put your logic here
+	templatePath := "home/index.html"
+	// TODO: Move to outside or insice MakeMuxer func in production; user here to test, so templates are recompiled every request
+	tpl := template.Must(template.New(templatePath).Funcs(funcMap).ParseFiles(fmt.Sprintf("templates/%s", templatePath), "templates/base.html"))
+
+	var doc bytes.Buffer
+	err := tpl.ExecuteTemplate(&doc, "base", nil)
+	if err != nil {
+		ctx.InternalServerError(err)
+	}
+
+	ctx.OK(doc.Bytes())
 
 	// HomeController_Dashboard: end_implement
 	return nil
@@ -32,15 +53,5 @@ func (c *HomeController) Profile(ctx *app.ProfileHomeContext) error {
 	// Put your logic here
 
 	// HomeController_Profile: end_implement
-	return nil
-}
-
-// SetType runs the setType action.
-func (c *HomeController) SetType(ctx *app.SetTypeHomeContext) error {
-	// HomeController_SetType: start_implement
-
-	// Put your logic here
-
-	// HomeController_SetType: end_implement
 	return nil
 }
