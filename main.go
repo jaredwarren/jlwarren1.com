@@ -23,7 +23,8 @@ func main() {
 	app.MountHomeController(service, c)
 
 	// Start service
-	if err := service.ListenAndServe(":8443"); err != nil {
+	if err := service.ListenAndServeTLS(":8443", "cert.pem", "key.pem"); err != nil {
 		service.LogError("startup", "err", err)
 	}
+
 }

@@ -1,0 +1,217 @@
+consumes:
+- application/json
+- application/xml
+- application/gob
+- application/x-gob
+definitions:
+  error:
+    description: Error response media type (default view)
+    example:
+      code: invalid_value
+      detail: Value of ID must be an integer
+      id: 3F1FKVRR
+      meta:
+        timestamp: 1.458609e+09
+      status: "400"
+    properties:
+      code:
+        description: an application-specific error code, expressed as a string value.
+        example: invalid_value
+        type: string
+      detail:
+        description: a human-readable explanation specific to this occurrence of the
+          problem.
+        example: Value of ID must be an integer
+        type: string
+      id:
+        description: a unique identifier for this particular occurrence of the problem.
+        example: 3F1FKVRR
+        type: string
+      meta:
+        additionalProperties: true
+        description: a meta object containing non-standard meta-information about
+          the error.
+        example:
+          timestamp: 1.458609e+09
+        type: object
+      status:
+        description: the HTTP status code applicable to this problem, expressed as
+          a string value.
+        example: "400"
+        type: string
+    title: 'Mediatype identifier: application/vnd.goa.error; view=default'
+    type: object
+externalDocs:
+  description: BladeHQ Shipping Service
+  url: http://wiki.bhq.local/index.php/BladeHQ_Shipping_Service_Application
+host: localhost:8443
+info:
+  contact:
+    email: jlwarren1.com
+    name: Jared L. Warren
+    url: http://www.jlwarren1.com
+  description: Me
+  title: Jared L. Warren
+  version: ""
+paths:
+  /:
+    get:
+      description: Show basic actions
+      operationId: home#dashboard
+      produces:
+      - application/vnd.goa.error
+      - text/html
+      responses:
+        "200":
+          description: OK
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/error'
+      schemes:
+      - https
+      summary: dashboard home
+      tags:
+      - home
+  /bower_components/{filename}:
+    get:
+      operationId: home#/bower_components/*filename
+      parameters:
+      - description: Relative file path
+        in: path
+        name: filename
+        required: true
+        type: string
+      responses:
+        "200":
+          description: File downloaded
+          schema:
+            type: file
+        "404":
+          description: File not found
+          schema:
+            $ref: '#/definitions/error'
+      schemes:
+      - https
+      summary: Download static/bower_components/
+  /images/favicon.ico:
+    get:
+      operationId: home#/images/favicon.ico
+      responses:
+        "200":
+          description: File downloaded
+          schema:
+            type: file
+      schemes:
+      - https
+      summary: Download static/images/favicon.ico
+  /index:
+    get:
+      operationId: home#/index
+      responses:
+        "200":
+          description: File downloaded
+          schema:
+            type: file
+      schemes:
+      - https
+      summary: Download static/index.html
+  /index.html:
+    get:
+      operationId: home#/index.html
+      responses:
+        "200":
+          description: File downloaded
+          schema:
+            type: file
+      schemes:
+      - https
+      summary: Download static/index.html
+  /profile:
+    get:
+      description: Set Printer Type
+      operationId: home#profile
+      produces:
+      - application/vnd.goa.error
+      - text/html
+      responses:
+        "200":
+          description: OK
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/error'
+      schemes:
+      - https
+      summary: profile home
+      tags:
+      - home
+  /resume:
+    get:
+      description: Single Page Resume
+      operationId: home#resume
+      produces:
+      - text/html
+      - application/vnd.goa.error
+      responses:
+        "200":
+          description: OK
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/error'
+      schemes:
+      - https
+      summary: resume home
+      tags:
+      - home
+  /src/{filename}:
+    get:
+      operationId: home#/src/*filename
+      parameters:
+      - description: Relative file path
+        in: path
+        name: filename
+        required: true
+        type: string
+      responses:
+        "200":
+          description: File downloaded
+          schema:
+            type: file
+        "404":
+          description: File not found
+          schema:
+            $ref: '#/definitions/error'
+      schemes:
+      - https
+      summary: Download static/src/
+  /static/{filename}:
+    get:
+      operationId: home#/static/*filename
+      parameters:
+      - description: Relative file path
+        in: path
+        name: filename
+        required: true
+        type: string
+      responses:
+        "200":
+          description: File downloaded
+          schema:
+            type: file
+        "404":
+          description: File not found
+          schema:
+            $ref: '#/definitions/error'
+      schemes:
+      - https
+      summary: Download static/
+produces:
+- application/json
+- application/xml
+- application/gob
+- application/x-gob
+schemes:
+- https
+swagger: "2.0"

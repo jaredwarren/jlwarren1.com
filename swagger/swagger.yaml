@@ -39,7 +39,7 @@ definitions:
           a string value.
         example: "400"
         type: string
-    title: 'Mediatype identifier: application/vnd.goa.error'
+    title: 'Mediatype identifier: application/vnd.goa.error; view=default'
     type: object
 externalDocs:
   description: BladeHQ Shipping Service
@@ -58,6 +58,9 @@ paths:
     get:
       description: Show basic actions
       operationId: home#dashboard
+      produces:
+      - application/vnd.goa.error
+      - text/html
       responses:
         "200":
           description: OK
@@ -128,6 +131,9 @@ paths:
     get:
       description: Set Printer Type
       operationId: home#profile
+      produces:
+      - application/vnd.goa.error
+      - text/html
       responses:
         "200":
           description: OK
@@ -138,6 +144,25 @@ paths:
       schemes:
       - https
       summary: profile home
+      tags:
+      - home
+  /resume:
+    get:
+      description: Single Page Resume
+      operationId: home#resume
+      produces:
+      - text/html
+      - application/vnd.goa.error
+      responses:
+        "200":
+          description: OK
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/error'
+      schemes:
+      - https
+      summary: resume home
       tags:
       - home
   /src/{filename}:

@@ -23,6 +23,13 @@ var _ = Resource("home", func() {
 		Response(InternalServerError, ErrorMedia)
 	})
 
+	Action("resume", func() {
+		Description("Single Page Resume")
+		Routing(GET("/resume"))
+		Response(OK, "text/html")
+		Response(InternalServerError, ErrorMedia)
+	})
+
 	Files("/index.html", "static/index.html")
 	Files("/index", "static/index.html")
 	Files("/images/favicon.ico", "static/images/favicon.ico")

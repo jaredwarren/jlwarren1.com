@@ -55,3 +55,23 @@ func (c *HomeController) Profile(ctx *app.ProfileHomeContext) error {
 	// HomeController_Profile: end_implement
 	return nil
 }
+
+// Resume runs the resume action.
+func (c *HomeController) Resume(ctx *app.ResumeHomeContext) error {
+	// HomeController_Resume: start_implement
+
+	templatePath := "home/resume.html"
+	// TODO: Move to outside or insice MakeMuxer func in production; user here to test, so templates are recompiled every request
+	tpl := template.Must(template.New(templatePath).Funcs(funcMap).ParseFiles("static/resume.html", fmt.Sprintf("templates/%s", templatePath), "templates/base.html"))
+
+	var doc bytes.Buffer
+	err := tpl.ExecuteTemplate(&doc, "base", nil)
+	if err != nil {
+		ctx.InternalServerError(err)
+	}
+
+	ctx.OK(doc.Bytes())
+
+	// HomeController_Resume: end_implement
+	return nil
+}
