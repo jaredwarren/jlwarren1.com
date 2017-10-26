@@ -16,6 +16,11 @@ var funcMap = template.FuncMap{
 "tobool": tobool,*/
 }
 
+// Page ...
+type Page struct {
+	Title string
+}
+
 // HomeController implements the home resource.
 type HomeController struct {
 	*goa.Controller
@@ -62,10 +67,14 @@ func (c *HomeController) Resume(ctx *app.ResumeHomeContext) error {
 
 	templatePath := "home/resume.html"
 	// TODO: Move to outside or insice MakeMuxer func in production; user here to test, so templates are recompiled every request
-	tpl := template.Must(template.New(templatePath).Funcs(funcMap).ParseFiles("static/resume.html", fmt.Sprintf("templates/%s", templatePath), "templates/base.html"))
+	tpl, err := template.New(templatePath).Funcs(funcMap).ParseFiles(fmt.Sprintf("templates/%s", templatePath), "templates/godocbase.html")
+	tpl = template.Must(tpl, err)
 
 	var doc bytes.Buffer
-	err := tpl.ExecuteTemplate(&doc, "base", nil)
+	page := &Page{
+		Title: "Resume - Jared L. Warren",
+	}
+	err = tpl.ExecuteTemplate(&doc, "base", page)
 	if err != nil {
 		ctx.InternalServerError(err)
 	}

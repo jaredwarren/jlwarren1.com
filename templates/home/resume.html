@@ -1,14 +1,205 @@
-{{define "head"}}
-<script type="text/javascript">
-    // use an anonymous function
-    $(function() {
+{{define "page"}}
+<div id="page" class="wide">
+	<div class="container">
+		<h1>Jared L. Warren</h1>
+		<div id="nav">Longmont, CO</div>
+		<div id="short-nav">
+			<dl>
+				<dd><code><a href="https://github.com/jaredwarren">github.com/jaredwarren <i class="fa fa-external-link" aria-hidden="true"></i></a></code></dd>
+				<dd><code><a href="https://twitter.com/jlwarren1">@jlwarren1 <i class="fa fa-external-link" aria-hidden="true"></i></a></code></dd>
+				<dd><code><a href="mailto:jlwarren1@gmail.com">jlwarren1@gmail.com <i class="fa fa-envelope-o" aria-hidden="true"></i></i></a></code></dd>
+			</dl>
+			<dl>
+				<dd><a href="#pkg-overview" class="overviewLink">Overview</a></dd>
+				<dd><a href="#pkg-index" class="indexLink">Index</a></dd>
+				<dd><a href="#pkg-subdirectories">Subdirectories</a></dd>
+			</dl>
+		</div>
+		<div id="pkg-overview" class="toggleVisible">
+			<div class="collapsed">
+				<h2 class="toggleButton" title="Click to show Overview section">Overview ▹</h2>
+			</div>
+			<div class="expanded">
+                <h2 class="toggleButton" title="Click to hide Overview section">Overview ▾</h2>
+                <h3>Full-Stack developer</h3>
+				<p>
+					Expert full-stack web developer offering 10+ years of experience building and
+					maintaining complex, mission-critical web applications.
+                </p>
+                <h3>Quality</h3>
+				<p>
+					Product Focused developer who is fanatical about creating quality, user-friendly,
+					secure, and scalability applications.
+                </p>
+                <p>
+                    Skillful Problem solver finding innovative solutions to problems using a
+                    variety of tools, algorithms and best practices.
+                </p>
+				
+                <h3>Leadership</h3>
+				<p>
+					Team Leader with well developed skills in prioritizing, organizing, decision
+					making, time management, and communication.
+                </p>
+                <p>
+                    Agile software developer, accustomed to gathering and analysing business
+                    requirements, translating requirements into technical solutions, implementing
+                    design, testing and evaluating usage.
+                </p>
+				
+				<h3 id="hdr-Basics">Basics</h3>
+				<p>
+                        Web Application Development
+                        Service-Oriented Architecture
+                        Enterprise Application
+                        Project Management
+                        Software Development Life cycle
+                        Release Management
+				</p>
+			</div>
+		</div>
+		<div id="pkg-index" class="toggleVisible">
+			<div class="collapsed">
+				<h2 class="toggleButton" title="Click to show Index section">Index ▹</h2>
+			</div>
+			<div class="expanded">
+				<h2 class="toggleButton" title="Click to hide Index section">Index ▾</h2>
+				<!-- Table of contents for API; must be named manual-nav to turn off auto nav. -->
+				<div id="manual-nav">
+					<dl>
+						<dd><a href="#pkg-skills">Skills</a></dd>
+						<dd><a href="#pkg-variables">Variables</a></dd>
+						<dd><a href="#pkg-education">Education</a></dd>
+						<dd><a href="#pkg-experience">Experience</a></dd>
+					</dl>
+				</div>
+				<!-- #manual-nav -->
+				<h4>Package files</h4>
+				<p>
+					<span style="font-size:90%">
+					<a href="/src/github.com/jaredwarren/resume/doc.go">doc.go</a>
+					</span>
+				</p>
+			</div>
+			<!-- .expanded -->
+		</div>
+		<!-- #pkg-index -->
+		<div id="pkg-callgraph" class="toggle" style="display: none">
+			<div class="collapsed">
+				<h2 class="toggleButton" title="Click to show Internal Call Graph section">Internal call graph ▹</h2>
+			</div>
+			<!-- .expanded -->
+			<div class="expanded">
+				<h2 class="toggleButton" title="Click to hide Internal Call Graph section">Internal call graph ▾</h2>
+				<p>
+					In the call graph viewer below, each node
+					is a function belonging to this package
+					and its children are the functions it
+					calls&mdash;perhaps dynamically.
+				</p>
+				<p>
+					The root nodes are the entry points of the
+					package: functions that may be called from
+					outside the package.
+					There may be non-exported or anonymous
+					functions among them if they are called
+					dynamically from another package.
+				</p>
+				<p>
+					Click a node to visit that function's source code.
+					From there you can visit its callers by
+					clicking its declaring <code>func</code>
+					token.
+				</p>
+				<p>
+					Functions may be omitted if they were
+					determined to be unreachable in the
+					particular programs or tests that were
+					analyzed.
+				</p>
+				<!-- Zero means show all package entry points. -->
+				<ul style="margin-left: 0.5in" id="callgraph-0" class="treeview"></ul>
+			</div>
+		</div>
+		<!-- #pkg-callgraph -->
+        <h2 id="pkg-skills">Skills</h2>
+        <h4>PHP</h4>
+        <p>
+            I have over 10 years of experience working with PHP. I've worked with several different frameworks, including laravel, smyphony, smarty... 
+            I've also written my own framework from scratch. I've learned to use best practices, and optomize for performance. I've learned best security practices.  
+        </p>
+        <h4>MySQL | NoSQL</h4>
+        <p>
+            10 plus years working with both MySQL databases. best practices. efficient queries...
+        </p>
+        <h4>Git</h4>
+        <p>
+            10 plus year working with git. Implemet git workflow where one wasn't being used. git deployment with hooks.
+        </p>
+        <h4>Go</h4>
+        <p>
+            3 years professional idomatic Go experience. Built a printer, scanner, scale service. read state and send data to a printer. continous read from scale, and change settings. read input from scanner. 
+        </p>
+        <h4>Docker | Vagrant</h4>
+        <p>
+            migrating systems from wamp/mamp to docker. 
+        </p>
+        <h4>HTML5 | JavaScript | CSS</h4>
+        <p>
+            various frameworks: jquery, react, bootstrap, sass, sencha touch, extjs, polymer.
+        </p>
 
+        <h2 id="pkg-experience">Experience</h2>
+        <h3>Blade HQ</h3>
+        <p>Mar 2016 to Present</p>
+        <h4>Senior Software engineer</h4>
+        <p>
+            Maintain and enhance custom ecommerce and inventory management software. Built tools to manage inventory, purchase shipping labels, update store content, and chart statistics. 
+        </p>
+        <ul>
+            <li>Git workflow and release process</li> 
+            <li>PCI Compliance</li>
+            <li>Created tools to purchase and ship domestic and international packages</li>
+            <li>Build a network scale and printing application written in Go</li>
+            <li>Designed and build a charting api </li>
+            <li>Upgraded system from PHP 5.3 to PHP 7 including removing deprecated functionality and adding improved security</li>
+            <li>Restructured framework implementing MVP/C design
+            </li>
+        </ul>
+        <h3>Callidus Cloud / Rapid Intake</h3>
+        <p>Mar 2016 to Present</p>
+        <h4>Development Team Lead</h4>
+        <p>
+                Lead a team of developers in planning, designing, building, and maintaining a suite of eLearning tools.
+        </p>
+        <ul>
+            <li>Designed, built and maintained a collaborative, form based eLearning course authoring tool. </li>
+            <li>Engineered a custom PHP framework that improved performance, reduced the amount of code that needed maintained, and reduced the error rate from 6% to less than 0.001%. </li>
+            <li>Enhanced entire system security implementing ISO 27001:2013 and SOC II standards.</li>
+            <li>Integrated an asset management and media conversion tool into the authoring environment. </li>
+            <li>Engineered a customizable, cross-browser, eLearning course player. </li>
+            <li>Designed, built an iOS and Android platform to deploy mobile training content, which allowed for offline access, synchronized course progress across multiple devices, and tracked activity to a learning management system.</li>
+            <li>Integrated a course reviewing and issue management system. </li>
+            <li>Created a web based course screen capture tool, and corresponding interactive image editing and markup tool. </li>
+        </ul>
 
+		<!-- <pre>const <span id="ASdf">ASdf</span> = &#34;&#34;</pre> -->
+        <h2 id="pkg-education">Education</h2>
+        <h3>Brigham Young University - 2009</h3>
+        <h4>BS Mechanical Engineering</h4>
+        <p>
+            strong math background. cad programming.
+        </p>
+        <h4>Minor Computer Science</h4>
+        <p>
+            data structures, database design
+        </p>
 
-    });
-</script>
-{{end}} {{define "body"}}
-<div>
- {{template "static/resume.html"}}
+		<div id="footer">
+			&copy; 2017<br>
+			Jared L. Warren
+		</div>
+	</div>
+	<!-- .container -->
 </div>
 {{end}}
