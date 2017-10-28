@@ -132,8 +132,8 @@ paths:
       description: Set Printer Type
       operationId: home#profile
       produces:
-      - application/vnd.goa.error
       - text/html
+      - application/vnd.goa.error
       responses:
         "200":
           description: OK
@@ -151,8 +151,8 @@ paths:
       description: Single Page Resume
       operationId: home#resume
       produces:
-      - text/html
       - application/vnd.goa.error
+      - text/html
       responses:
         "200":
           description: OK
@@ -165,6 +165,17 @@ paths:
       summary: resume home
       tags:
       - home
+  /resume/JaredWarren-Resume.pdf:
+    get:
+      operationId: home#/resume/JaredWarren-Resume.pdf
+      responses:
+        "200":
+          description: File downloaded
+          schema:
+            type: file
+      schemes:
+      - https
+      summary: Download static/JaredWarren-Resume.pdf
   /src/{filename}:
     get:
       operationId: home#/src/*filename

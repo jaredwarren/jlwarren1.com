@@ -1,0 +1,54 @@
+==================================================================
+https://keybase.io/jlwarren1
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of http://jlwarren1.com
+  * I am jlwarren1 (https://keybase.io/jlwarren1) on keybase.
+  * I have a public key ASDhb5OXUh-L1j87g7Md1ygNWicJLDhVDJdCaiexQ0mFowo
+
+To do so, I am signing this object:
+
+{
+    "body": {
+        "key": {
+            "eldest_kid": "0120e16f9397521f8bd63f3b83b31dd7280d5a27092c38550c97426a27b1434985a30a",
+            "host": "keybase.io",
+            "kid": "0120e16f9397521f8bd63f3b83b31dd7280d5a27092c38550c97426a27b1434985a30a",
+            "uid": "d13f6766601543004994cd6e5d949019",
+            "username": "jlwarren1"
+        },
+        "service": {
+            "hostname": "jlwarren1.com",
+            "protocol": "http:"
+        },
+        "type": "web_service_binding",
+        "version": 1
+    },
+    "client": {
+        "name": "keybase.io go client",
+        "version": "1.0.17"
+    },
+    "ctime": 1472231941,
+    "expire_in": 504576000,
+    "merkle_root": {
+        "ctime": 1472231882,
+        "hash": "ce020c96f49337c35389e7013f43f259713b840bc9260bd4a848874228049de63d84a2acf0c06238b0ea232f332b327424e6571801326f24be3964db1be1f00f",
+        "seqno": 603766
+    },
+    "prev": "804e2b239a5d3c79397248e02ebb3ad43a2c9014568ed90da2ed4392f712aa8c",
+    "seqno": 11,
+    "tag": "signature"
+}
+
+which yields the signature:
+
+hKRib2R5hqhkZXRhY2hlZMOpaGFzaF90eXBlCqNrZXnEIwEg4W+Tl1Ifi9Y/O4OzHdcoDVonCSw4VQyXQmonsUNJhaMKp3BheWxvYWTFAvZ7ImJvZHkiOnsia2V5Ijp7ImVsZGVzdF9raWQiOiIwMTIwZTE2ZjkzOTc1MjFmOGJkNjNmM2I4M2IzMWRkNzI4MGQ1YTI3MDkyYzM4NTUwYzk3NDI2YTI3YjE0MzQ5ODVhMzBhIiwiaG9zdCI6ImtleWJhc2UuaW8iLCJraWQiOiIwMTIwZTE2ZjkzOTc1MjFmOGJkNjNmM2I4M2IzMWRkNzI4MGQ1YTI3MDkyYzM4NTUwYzk3NDI2YTI3YjE0MzQ5ODVhMzBhIiwidWlkIjoiZDEzZjY3NjY2MDE1NDMwMDQ5OTRjZDZlNWQ5NDkwMTkiLCJ1c2VybmFtZSI6Impsd2FycmVuMSJ9LCJzZXJ2aWNlIjp7Imhvc3RuYW1lIjoiamx3YXJyZW4xLmNvbSIsInByb3RvY29sIjoiaHR0cDoifSwidHlwZSI6IndlYl9zZXJ2aWNlX2JpbmRpbmciLCJ2ZXJzaW9uIjoxfSwiY2xpZW50Ijp7Im5hbWUiOiJrZXliYXNlLmlvIGdvIGNsaWVudCIsInZlcnNpb24iOiIxLjAuMTcifSwiY3RpbWUiOjE0NzIyMzE5NDEsImV4cGlyZV9pbiI6NTA0NTc2MDAwLCJtZXJrbGVfcm9vdCI6eyJjdGltZSI6MTQ3MjIzMTg4MiwiaGFzaCI6ImNlMDIwYzk2ZjQ5MzM3YzM1Mzg5ZTcwMTNmNDNmMjU5NzEzYjg0MGJjOTI2MGJkNGE4NDg4NzQyMjgwNDlkZTYzZDg0YTJhY2YwYzA2MjM4YjBlYTIzMmYzMzJiMzI3NDI0ZTY1NzE4MDEzMjZmMjRiZTM5NjRkYjFiZTFmMDBmIiwic2Vxbm8iOjYwMzc2Nn0sInByZXYiOiI4MDRlMmIyMzlhNWQzYzc5Mzk3MjQ4ZTAyZWJiM2FkNDNhMmM5MDE0NTY4ZWQ5MGRhMmVkNDM5MmY3MTJhYThjIiwic2Vxbm8iOjExLCJ0YWciOiJzaWduYXR1cmUifaNzaWfEQJuGMf1qSMg7x+fjZZ4E9bADirxuYL7QtpbrmEXY81w7rndWGPwULycAAFPjs6UpvQDLr4tKzAbhn5LF5zalyQioc2lnX3R5cGUgpGhhc2iCpHR5cGUIpXZhbHVlxCDQE4RxuJZeEQi6yU7eMNqYQuIdMBqpQoNalg7CMLItCqN0YWfNAgKndmVyc2lvbgE=
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/jlwarren1
+
+==================================================================

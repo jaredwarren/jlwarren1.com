@@ -5,7 +5,6 @@
 // Command:
 // $ goagen
 // --design=github.com/jaredwarren/jlwarren1.com/design
-// --force=true
 // --out=$(GOPATH)/src/github.com/jaredwarren/jlwarren1.com
 // --version=v1.2.0-dirty
 
@@ -277,6 +276,13 @@ func (cmd *DownloadCommand) Run(c *client.Client, args []string) error {
 
 	if rpath[0] != '/' {
 		rpath = "/" + rpath
+	}
+	if rpath == "/resume/JaredWarren-Resume.pdf" {
+		fnf = c.DownloadJaredWarrenResumePdf
+		if outfile == "" {
+			outfile = "JaredWarren-Resume.pdf"
+		}
+		goto found
 	}
 	if rpath == "/images/favicon.ico" {
 		fnf = c.DownloadFaviconIco
