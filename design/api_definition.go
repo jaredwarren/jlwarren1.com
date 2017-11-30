@@ -17,6 +17,16 @@ var _ = API("jlwarren1", func() {
 		Description("BladeHQ Shipping Service")
 		URL("http://wiki.bhq.local/index.php/BladeHQ_Shipping_Service_Application")
 	})
-	Host("localhost:8443")
-	Scheme("https")
+	Host("localhost:8080")
+	Scheme("http")
+
+	ResponseTemplate(Created, func(pattern string) {
+		Description("Resource created")
+		Status(301)
+		Headers(func() {
+			Header("Location", String, "href to created resource", func() {
+				Pattern(pattern)
+			})
+		})
+	})
 })

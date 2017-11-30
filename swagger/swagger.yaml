@@ -44,7 +44,7 @@ definitions:
 externalDocs:
   description: BladeHQ Shipping Service
   url: http://wiki.bhq.local/index.php/BladeHQ_Shipping_Service_Application
-host: localhost:8443
+host: localhost:8080
 info:
   contact:
     email: jlwarren1.com
@@ -69,31 +69,21 @@ paths:
           schema:
             $ref: '#/definitions/error'
       schemes:
-      - https
+      - http
       summary: dashboard home
       tags:
       - home
-  /bower_components/{filename}:
+  /.well-known/keybase.txt:
     get:
-      operationId: home#/bower_components/*filename
-      parameters:
-      - description: Relative file path
-        in: path
-        name: filename
-        required: true
-        type: string
+      operationId: home#/.well-known/keybase.txt
       responses:
         "200":
           description: File downloaded
           schema:
             type: file
-        "404":
-          description: File not found
-          schema:
-            $ref: '#/definitions/error'
       schemes:
-      - https
-      summary: Download static/bower_components/
+      - http
+      summary: Download static/keybase.txt
   /images/favicon.ico:
     get:
       operationId: home#/images/favicon.ico
@@ -103,37 +93,15 @@ paths:
           schema:
             type: file
       schemes:
-      - https
+      - http
       summary: Download static/images/favicon.ico
-  /index:
-    get:
-      operationId: home#/index
-      responses:
-        "200":
-          description: File downloaded
-          schema:
-            type: file
-      schemes:
-      - https
-      summary: Download static/index.html
-  /index.html:
-    get:
-      operationId: home#/index.html
-      responses:
-        "200":
-          description: File downloaded
-          schema:
-            type: file
-      schemes:
-      - https
-      summary: Download static/index.html
   /profile:
     get:
       description: Set Printer Type
       operationId: home#profile
       produces:
-      - text/html
       - application/vnd.goa.error
+      - text/html
       responses:
         "200":
           description: OK
@@ -142,7 +110,7 @@ paths:
           schema:
             $ref: '#/definitions/error'
       schemes:
-      - https
+      - http
       summary: profile home
       tags:
       - home
@@ -161,7 +129,7 @@ paths:
           schema:
             $ref: '#/definitions/error'
       schemes:
-      - https
+      - http
       summary: resume home
       tags:
       - home
@@ -174,29 +142,31 @@ paths:
           schema:
             type: file
       schemes:
-      - https
+      - http
       summary: Download static/JaredWarren-Resume.pdf
-  /src/{filename}:
+  /resume/update:
     get:
-      operationId: home#/src/*filename
-      parameters:
-      - description: Relative file path
-        in: path
-        name: filename
-        required: true
-        type: string
+      description: Download resume pdf
+      operationId: home#updateResume
+      produces:
+      - application/vnd.goa.error
       responses:
-        "200":
-          description: File downloaded
-          schema:
-            type: file
-        "404":
-          description: File not found
+        "301":
+          description: Resource created
+          headers:
+            Location:
+              description: href to created resource
+              pattern: /resume
+              type: string
+        "500":
+          description: Internal Server Error
           schema:
             $ref: '#/definitions/error'
       schemes:
-      - https
-      summary: Download static/src/
+      - http
+      summary: updateResume home
+      tags:
+      - home
   /static/{filename}:
     get:
       operationId: home#/static/*filename
@@ -216,7 +186,7 @@ paths:
           schema:
             $ref: '#/definitions/error'
       schemes:
-      - https
+      - http
       summary: Download static/
 produces:
 - application/json
@@ -224,5 +194,5 @@ produces:
 - application/gob
 - application/x-gob
 schemes:
-- https
+- http
 swagger: "2.0"

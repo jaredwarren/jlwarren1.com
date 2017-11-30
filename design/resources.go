@@ -30,15 +30,17 @@ var _ = Resource("home", func() {
 		Response(InternalServerError, ErrorMedia)
 	})
 
-	Files("/resume/JaredWarren-Resume.pdf", "static/JaredWarren-Resume.pdf")
+	Action("updateResume", func() {
+		Description("Download resume pdf")
+		Routing(GET("/resume/update"))
+		//Response(OK, "text/html")
+		Response(Created, "/resume")
+		Response(InternalServerError, ErrorMedia)
+	})
 
+	Files("/resume/JaredWarren-Resume.pdf", "static/JaredWarren-Resume.pdf")
+	Files("/images/favicon.ico", "static/images/favicon.ico")
 	Files("/.well-known/keybase.txt", "static/keybase.txt")
 
-	Files("/index.html", "static/index.html")
-	Files("/index", "static/index.html")
-	Files("/images/favicon.ico", "static/images/favicon.ico")
 	Files("/static/*filename", "static/")
-	Files("/src/*filename", "static/src/")
-	Files("/bower_components/*filename", "static/bower_components/")
-
 })

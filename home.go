@@ -4,6 +4,9 @@ import (
 	"bytes"
 	"fmt"
 	"html/template"
+	"io"
+	"net/http"
+	"os"
 
 	"github.com/goadesign/goa"
 	"github.com/jaredwarren/jlwarren1.com/app"
@@ -82,5 +85,41 @@ func (c *HomeController) Resume(ctx *app.ResumeHomeContext) error {
 	ctx.OK(doc.Bytes())
 
 	// HomeController_Resume: end_implement
+	return nil
+}
+
+// UpdateResume runs the updateResume action.
+func (c *HomeController) UpdateResume(ctx *app.UpdateResumeHomeContext) error {
+	// HomeController_UpdateResume: start_implement
+
+	// Put your logic here
+	//downloadFile("static/JaredWarren-Resume.pdf", "https://docs.google.com/document/export?format=pdf&id=1Y2XhrTCAPQ1ogfS2Q2kvaAEpwm8FDNuSHTisr0L7YJA")
+	// I may need to fix permissions here
+
+	// HomeController_UpdateResume: end_implement
+	return ctx.Created()
+}
+
+func downloadFile(filepath string, url string) (err error) {
+	// Create the file
+	out, err := os.Create(filepath)
+	if err != nil {
+		return err
+	}
+	defer out.Close()
+
+	// Get the data
+	resp, err := http.Get(url)
+	if err != nil {
+		return err
+	}
+	defer resp.Body.Close()
+
+	// Writer the body to file
+	_, err = io.Copy(out, resp.Body)
+	if err != nil {
+		return err
+	}
+
 	return nil
 }
