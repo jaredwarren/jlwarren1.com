@@ -5,6 +5,7 @@
 // Command:
 // $ goagen
 // --design=github.com/jaredwarren/jlwarren1.com/design
+// --force=true
 // --out=$(GOPATH)/src/github.com/jaredwarren/jlwarren1.com
 // --version=v1.3.0
 
@@ -103,8 +104,8 @@ func MountHomeController(service *goa.Service, ctrl HomeController) {
 		}
 		return ctrl.UpdateResume(rctx)
 	}
-	service.Mux.Handle("GET", "/resume/update", ctrl.MuxHandler("updateResume", h, nil))
-	service.LogInfo("mount", "ctrl", "Home", "action", "UpdateResume", "route", "GET /resume/update")
+	service.Mux.Handle("GET", "/updateresume", ctrl.MuxHandler("updateResume", h, nil))
+	service.LogInfo("mount", "ctrl", "Home", "action", "UpdateResume", "route", "GET /updateresume")
 
 	h = ctrl.FileHandler("/static/*filename", "static/")
 	service.Mux.Handle("GET", "/static/*filename", ctrl.MuxHandler("serve", h, nil))

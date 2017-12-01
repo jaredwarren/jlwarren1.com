@@ -1,0 +1,44 @@
+{{define "base"}}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#375EAB">
+    <title>jlwarren1.com</title>
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+    <link type="text/css" rel="stylesheet" href="/static/css/main.css">
+    <link rel="stylesheet" href="/static/js/jquery.treeview.css">
+
+    <link rel="stylesheet" href="/static/css/font-awesome.min.css">
+    <script type="text/javascript">window.initFuncs = [];</script>
+    <script type="text/javascript" src="/static/js/jquery.js"></script>
+    <script type="text/javascript" src="/static/js/jquery.treeview.js"></script>
+    <script type="text/javascript" src="/static/js/jquery.treeview.edit.js"></script>
+    <script type="text/javascript" src="/static/js/godocs.js"></script>
+</head>
+
+<body>
+    <div id='lowframe' style="position: fixed; bottom: 0; left: 0; height: 0; width: 100%; border-top: thin solid grey; background-color: white; overflow: auto;">
+        ...
+    </div>
+    <!-- #lowframe -->
+    <div id="topbar" class="wide" style="display:flex;">
+        <div class="container">
+            <div class="top-heading" id="heading-wide">
+                <a href="/">Jared L. Warren</a>
+            </div>
+        </div>
+    </div>
+    <div class="tile-menu" style="display:flex;">
+        <a class="menu-item" href="/resume/">Resume</a>
+        <a class="menu-item" href="/profile/">Profile</a>
+        <a class="menu-item" href="/projects/">Projects</a>
+        <a class="menu-item" href="/contact-me/">D</a>
+    </div>
+</body>
+
+</html>
+{{end}}

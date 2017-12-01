@@ -32,7 +32,7 @@ var _ = Resource("home", func() {
 
 	Action("updateResume", func() {
 		Description("Download resume pdf")
-		Routing(GET("/resume/update"))
+		Routing(GET("/updateresume"))
 		//Response(OK, "text/html")
 		Response(Created, "/resume")
 		Response(InternalServerError, ErrorMedia)

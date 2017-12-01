@@ -5,6 +5,7 @@
 // Command:
 // $ goagen
 // --design=github.com/jaredwarren/jlwarren1.com/design
+// --force=true
 // --out=$(GOPATH)/src/github.com/jaredwarren/jlwarren1.com
 // --version=v1.3.0
 
@@ -248,7 +249,7 @@ func (c *Client) NewResumeHomeRequest(ctx context.Context, path string) (*http.R
 // UpdateResumeHomePath computes a request path to the updateResume action of home.
 func UpdateResumeHomePath() string {
 
-	return fmt.Sprintf("/resume/update")
+	return fmt.Sprintf("/updateresume")
 }
 
 // Download resume pdf

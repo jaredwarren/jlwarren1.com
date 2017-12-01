@@ -144,7 +144,28 @@ paths:
       schemes:
       - http
       summary: Download static/JaredWarren-Resume.pdf
-  /resume/update:
+  /static/{filename}:
+    get:
+      operationId: home#/static/*filename
+      parameters:
+      - description: Relative file path
+        in: path
+        name: filename
+        required: true
+        type: string
+      responses:
+        "200":
+          description: File downloaded
+          schema:
+            type: file
+        "404":
+          description: File not found
+          schema:
+            $ref: '#/definitions/error'
+      schemes:
+      - http
+      summary: Download static/
+  /updateresume:
     get:
       description: Download resume pdf
       operationId: home#updateResume
@@ -167,27 +188,6 @@ paths:
       summary: updateResume home
       tags:
       - home
-  /static/{filename}:
-    get:
-      operationId: home#/static/*filename
-      parameters:
-      - description: Relative file path
-        in: path
-        name: filename
-        required: true
-        type: string
-      responses:
-        "200":
-          description: File downloaded
-          schema:
-            type: file
-        "404":
-          description: File not found
-          schema:
-            $ref: '#/definitions/error'
-      schemes:
-      - http
-      summary: Download static/
 produces:
 - application/json
 - application/xml

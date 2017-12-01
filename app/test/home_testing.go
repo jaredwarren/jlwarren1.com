@@ -5,6 +5,7 @@
 // Command:
 // $ goagen
 // --design=github.com/jaredwarren/jlwarren1.com/design
+// --force=true
 // --out=$(GOPATH)/src/github.com/jaredwarren/jlwarren1.com
 // --version=v1.3.0
 
@@ -409,7 +410,7 @@ func UpdateResumeHomeCreated(t goatest.TInterface, ctx context.Context, service 
 	// Setup request context
 	rw := httptest.NewRecorder()
 	u := &url.URL{
-		Path: fmt.Sprintf("/resume/update"),
+		Path: fmt.Sprintf("/updateresume"),
 	}
 	req, err := http.NewRequest("GET", u.String(), nil)
 	if err != nil {
@@ -465,7 +466,7 @@ func UpdateResumeHomeInternalServerError(t goatest.TInterface, ctx context.Conte
 	// Setup request context
 	rw := httptest.NewRecorder()
 	u := &url.URL{
-		Path: fmt.Sprintf("/resume/update"),
+		Path: fmt.Sprintf("/updateresume"),
 	}
 	req, err := http.NewRequest("GET", u.String(), nil)
 	if err != nil {

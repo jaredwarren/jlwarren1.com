@@ -38,12 +38,16 @@ func NewHomeController(service *goa.Service) *HomeController {
 func (c *HomeController) Dashboard(ctx *app.DashboardHomeContext) error {
 	// HomeController_Dashboard: start_implement
 
-	templatePath := "home/index.html"
+	templatePath := "home/resume.html"
 	// TODO: Move to outside or insice MakeMuxer func in production; user here to test, so templates are recompiled every request
-	tpl := template.Must(template.New(templatePath).Funcs(funcMap).ParseFiles(fmt.Sprintf("templates/%s", templatePath), "templates/base.html"))
+	tpl, err := template.New(templatePath).Funcs(funcMap).ParseFiles(fmt.Sprintf("templates/%s", templatePath), "templates/godocbase.html")
+	tpl = template.Must(tpl, err)
 
 	var doc bytes.Buffer
-	err := tpl.ExecuteTemplate(&doc, "base", nil)
+	page := &Page{
+		Title: "Resume - Jared L. Warren",
+	}
+	err = tpl.ExecuteTemplate(&doc, "base", page)
 	if err != nil {
 		ctx.InternalServerError(err)
 	}
@@ -58,7 +62,17 @@ func (c *HomeController) Dashboard(ctx *app.DashboardHomeContext) error {
 func (c *HomeController) Profile(ctx *app.ProfileHomeContext) error {
 	// HomeController_Profile: start_implement
 
-	// Put your logic here
+	templatePath := "home/profile.html"
+	// TODO: Move to outside or insice MakeMuxer func in production; user here to test, so templates are recompiled every request
+	tpl := template.Must(template.New(templatePath).Funcs(funcMap).ParseFiles(fmt.Sprintf("templates/%s", templatePath)))
+
+	var doc bytes.Buffer
+	err := tpl.ExecuteTemplate(&doc, "base", nil)
+	if err != nil {
+		ctx.InternalServerError(err)
+	}
+
+	ctx.OK(doc.Bytes())
 
 	// HomeController_Profile: end_implement
 	return nil
@@ -93,8 +107,12 @@ func (c *HomeController) UpdateResume(ctx *app.UpdateResumeHomeContext) error {
 	// HomeController_UpdateResume: start_implement
 
 	// Put your logic here
-	//downloadFile("static/JaredWarren-Resume.pdf", "https://docs.google.com/document/export?format=pdf&id=1Y2XhrTCAPQ1ogfS2Q2kvaAEpwm8FDNuSHTisr0L7YJA")
+	err := downloadFile("static/JaredWarren-Resume.pdf", "https://docs.google.com/document/export?format=pdf&id=1Y2XhrTCAPQ1ogfS2Q2kvaAEpwm8FDNuSHTisr0L7YJA")
+	if err != nil {
+		ctx.InternalServerError(err)
+	}
 	// I may need to fix permissions here
+	ctx.ResponseData.Header().Set("Location", "/resume")
 
 	// HomeController_UpdateResume: end_implement
 	return ctx.Created()

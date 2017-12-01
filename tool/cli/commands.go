@@ -5,6 +5,7 @@
 // Command:
 // $ goagen
 // --design=github.com/jaredwarren/jlwarren1.com/design
+// --force=true
 // --out=$(GOPATH)/src/github.com/jaredwarren/jlwarren1.com
 // --version=v1.3.0
 
@@ -106,7 +107,7 @@ func RegisterCommands(app *cobra.Command, c *client.Client) {
 	}
 	tmp4 := new(UpdateResumeHomeCommand)
 	sub = &cobra.Command{
-		Use:   `home ["/resume/update"]`,
+		Use:   `home ["/updateresume"]`,
 		Short: ``,
 		RunE:  func(cmd *cobra.Command, args []string) error { return tmp4.Run(c, args) },
 	}
@@ -419,7 +420,7 @@ func (cmd *UpdateResumeHomeCommand) Run(c *client.Client, args []string) error {
 	if len(args) > 0 {
 		path = args[0]
 	} else {
-		path = "/resume/update"
+		path = "/updateresume"
 	}
 	logger := goa.NewLogger(log.New(os.Stderr, "", log.LstdFlags))
 	ctx := goa.WithLogger(context.Background(), logger)
