@@ -89,7 +89,7 @@ func (c *HomeController) Resume(ctx *app.ResumeHomeContext) error {
 
 	var doc bytes.Buffer
 	page := &Page{
-		Title: "Resume - Jared L. Warren",
+		Title: "CV - Jared L. Warren",
 	}
 	err = tpl.ExecuteTemplate(&doc, "base", page)
 	if err != nil {
