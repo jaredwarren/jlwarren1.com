@@ -1,0 +1,3 @@
+baseURL = "http://docker.local/"
+languageCode = "en-us"
+title = "My New Hugo Site"
