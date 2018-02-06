@@ -6,17 +6,9 @@ services:
     build: 
       context: ./hugo
     command: server --bind 0.0.0.0 \
-      --navigateToChanged \
-      --templateMetrics \
-      --buildDrafts
       --source /srv/hugo
-      --contentDir /srv/hugo/content
       --theme hyde
-      --config /srv/hugo/config.toml
-      --destination /srv/hugo/public
-      --debug
-      --verboseLog
-      --verbose
+      --buildDrafts
       --watch
     volumes:
       - ./site:/srv/hugo
