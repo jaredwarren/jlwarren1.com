@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  hugo:
+    image: jlwarren1/hugo:latest
+    build: 
+      context: ./hugo
+    command: server --bind 0.0.0.0 \
+      --navigateToChanged \
+      --templateMetrics \
+      --buildDrafts
+      --source /srv/hugo
+      --contentDir /srv/hugo/content
+      --theme hyde
+      --config /srv/hugo/config.toml
+      --destination /srv/hugo/public
+      --debug
+      --verboseLog
+      --verbose
+      --watch
+    volumes:
+      - ./site:/srv/hugo
+    ports:
+      - 1313:1313

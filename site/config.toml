@@ -1,3 +1,14 @@
-baseURL = "http://docker.local/"
+baseURL = "http://localhost:1313/"
 languageCode = "en-us"
-title = "My New Hugo Site"
+title = "Jared Warren"
+
+[[menu.main]]
+    name = "About"
+    weight = -110
+    identifier = "about"
+    url = "/about/"
+[[menu.main]]
+    name = "Kampane"
+    weight = -100
+    identifier = "campaigns"
+    url = "/campaigns/"
