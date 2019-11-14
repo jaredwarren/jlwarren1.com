@@ -2,13 +2,12 @@ baseURL = "http://localhost:1313/"
 languageCode = "en-us"
 title = "Jared Warren"
 
+[params]
+    description = "About Me"
+
+
 [[menu.main]]
     name = "About"
     weight = -110
     identifier = "about"
     url = "/about/"
-[[menu.main]]
-    name = "Kampane"
-    weight = -100
-    identifier = "campaigns"
-    url = "/campaigns/"
