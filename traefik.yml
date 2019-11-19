@@ -1,0 +1,10 @@
+
+## Static configuration
+entryPoints:
+  web:
+   address: ":80"
+  web-test:
+   address: ":801"
+
+providers:
+  docker: {}

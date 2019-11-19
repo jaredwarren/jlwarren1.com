@@ -6,15 +6,16 @@ version: '3'
 services:
   reverse-proxy:
     image: traefik:v2.0
-    command: 
-      - --api.insecure=true 
-      - --providers.docker
+    # command: 
+    #   - --api.insecure=true 
+    #   - --providers.docker
     ports:
       - "801:80"
       # The Web UI (enabled by --api.insecure=true)
       - "8081:8080"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+      - ./traefik.yml:/etc/traefik/traefik.yml
 
 
       ## TODO: figure out way to push up modules, (docker hub repo?)
@@ -24,7 +25,18 @@ services:
     image: containous/whoami
     labels:
       - "traefik.http.routers.whoami.rule=Host(`whoami.localhost`) || Path(`/whoami2`)"
-  whoami3:
-    image: containous/whoami
+  hugo:
+    image: jlwarren1/hugo:latest
+    build: 
+      context: ./blog/hugo
     labels:
-      - "traefik.http.routers.whoami3.rule=Host(`whoam3.localhost`) || Path(`/whoami3`)"
+      - "traefik.http.routers.whoami.rule=Host(`blog.localhost`) || Path(`/blog`)"
+    command: server --bind 0.0.0.0 \
+      --source /srv/hugo
+      --theme hyde
+      --buildDrafts
+      --watch
+    volumes:
+      - ./blog/site:/srv/hugo
+    ports:
+      - 1313:1313
