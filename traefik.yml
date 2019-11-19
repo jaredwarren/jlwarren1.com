@@ -7,9 +7,11 @@ entryPoints:
    address: ":8081"
   blog:
    address: ":1313"
+  ws:
+   protocol: "ws"
 
-api:
-  insecure: true
+# api:
+  # insecure: true
 
 providers:
   docker: {}

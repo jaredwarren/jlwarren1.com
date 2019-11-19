@@ -10,7 +10,7 @@ services:
       - "80:80"
       - "1313:1313"
       # The Web UI (enabled by --api.insecure=true)
-      - "8081:8080"
+      # - "8081:8080"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./traefik.yml:/etc/traefik/traefik.yml
@@ -31,6 +31,9 @@ services:
     labels:
       - traefik.http.routers.blog.rule=Host(`blog.localhost`, `localhost:1313`) || Path(`/blog2`)
       - traefik.http.services.blog.loadbalancer.server.port=1313
+      - traefik.ws.protocol=http
+      # - traefik.protocol=ws
+      # - traefik.protocol=http 
     # commands:https://gohugo.io/commands/hugo/
     command: server --bind 0.0.0.0
       --baseURL=blog.localhost
@@ -40,6 +43,7 @@ services:
       --watch
       --appendPort=false
       --verbose
+      --disableLiveReload=true
     volumes:
       - ./blog/site:/srv/hugo
     # ports:

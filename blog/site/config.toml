@@ -2,6 +2,7 @@ baseURL = "//blog.localhost"
 languageCode = "en-us"
 title = "Jared Warren"
 # relativeURLs = false
+disableLiveReload = true
 
 [params]
     description = "About Me"
