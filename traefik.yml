@@ -22,6 +22,16 @@ accessLog: {}
 log:
   filePath: "./traefik.log"
 
+serversTransport:
+  insecureSkipVerify: true
+  # rootCAs:
+  #   - /mycert.cert
+
+tls:
+  certificates:
+    - certFile: /cert/bladehq.com.crt
+      keyFile: /cert/bladehq.com.key
+
 # Latency Check
 http:
   middlewares:
