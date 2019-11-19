@@ -4,16 +4,17 @@ version: '3'
 
 
 services:
-  reverse-proxy:
+  traefik:
     image: traefik:v2.0
     ports:
       - "80:80"
       - "1313:1313"
       # The Web UI (enabled by --api.insecure=true)
-      # - "8081:8080"
+      - "8081:8080"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./traefik.yml:/etc/traefik/traefik.yml
+      - ./traefik.log:/etc/traefik/traefik.log
 
 
       ## TODO: figure out way to push up modules, (docker hub repo?)
@@ -23,6 +24,8 @@ services:
     image: containous/whoami
     labels:
       - "traefik.http.routers.whoami.rule=Host(`whoami.localhost`) || Path(`/whoami2`)"
+      - traefik.http.routers.whoami.entryPoints=web
+
   hugo:
     image: gohugoio/hugo
     # image: jlwarren1/hugo:latest
@@ -30,10 +33,9 @@ services:
       # context: ./blog/hugo
     labels:
       - traefik.http.routers.blog.rule=Host(`blog.localhost`, `localhost:1313`) || Path(`/blog2`)
+      - traefik.http.routers.blog.entryPoints=web
       - traefik.http.services.blog.loadbalancer.server.port=1313
-      - traefik.ws.protocol=http
-      # - traefik.protocol=ws
-      # - traefik.protocol=http 
+      # - traefik.ws.protocol=http
     # commands:https://gohugo.io/commands/hugo/
     command: server --bind 0.0.0.0
       --baseURL=blog.localhost
@@ -42,7 +44,6 @@ services:
       --buildDrafts
       --watch
       --appendPort=false
-      --verbose
       --disableLiveReload=true
     volumes:
       - ./blog/site:/srv/hugo

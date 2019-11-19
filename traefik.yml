@@ -3,15 +3,28 @@
 entryPoints:
   web:
    address: ":80"
+  websecure:
+    address: ":443"
   web-test:
    address: ":8081"
   blog:
    address: ":1313"
-  ws:
-   protocol: "ws"
 
-# api:
-  # insecure: true
+api:
+  insecure: true
+  dashboard: true
 
 providers:
   docker: {}
+
+accessLog: {}
+
+log:
+  filePath: "./traefik.log"
+
+# Latency Check
+http:
+  middlewares:
+    latency-check:
+      circuitBreaker:
+        expression: "LatencyAtQuantileMS(50.0) > 100"
