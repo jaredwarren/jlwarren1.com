@@ -1,6 +1,7 @@
-baseURL = "http://localhost:1313/"
+baseURL = "//blog.localhost"
 languageCode = "en-us"
 title = "Jared Warren"
+# relativeURLs = false
 
 [params]
     description = "About Me"

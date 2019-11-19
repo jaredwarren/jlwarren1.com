@@ -6,11 +6,9 @@ version: '3'
 services:
   reverse-proxy:
     image: traefik:v2.0
-    # command: 
-    #   - --api.insecure=true 
-    #   - --providers.docker
     ports:
-      - "801:80"
+      - "80:80"
+      - "1313:1313"
       # The Web UI (enabled by --api.insecure=true)
       - "8081:8080"
     volumes:
@@ -26,17 +24,23 @@ services:
     labels:
       - "traefik.http.routers.whoami.rule=Host(`whoami.localhost`) || Path(`/whoami2`)"
   hugo:
-    image: jlwarren1/hugo:latest
-    build: 
-      context: ./blog/hugo
+    image: gohugoio/hugo
+    # image: jlwarren1/hugo:latest
+    # build: 
+      # context: ./blog/hugo
     labels:
-      - "traefik.http.routers.whoami.rule=Host(`blog.localhost`) || Path(`/blog`)"
-    command: server --bind 0.0.0.0 \
+      - traefik.http.routers.blog.rule=Host(`blog.localhost`, `localhost:1313`) || Path(`/blog2`)
+      - traefik.http.services.blog.loadbalancer.server.port=1313
+    # commands:https://gohugo.io/commands/hugo/
+    command: server --bind 0.0.0.0
+      --baseURL=blog.localhost
       --source /srv/hugo
       --theme hyde
       --buildDrafts
       --watch
+      --appendPort=false
+      --verbose
     volumes:
       - ./blog/site:/srv/hugo
-    ports:
-      - 1313:1313
+    # ports:
+    #   - 1313:1313

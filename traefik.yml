@@ -4,7 +4,12 @@ entryPoints:
   web:
    address: ":80"
   web-test:
-   address: ":801"
+   address: ":8081"
+  blog:
+   address: ":1313"
+
+api:
+  insecure: true
 
 providers:
   docker: {}
