@@ -5,36 +5,43 @@ entryPoints:
    address: ":80"
   websecure:
     address: ":443"
-  web-test:
-   address: ":8081"
+  # web-test:
+  #  address: ":8081"
   blog:
    address: ":1313"
 
+# TODO: remove for production, or secure
 api:
-  insecure: true
-  dashboard: true
+  # insecure: true # http://localhost:8081/api/rawdata
+  # dashboard: true # http://localhost:8081/dashboard/#/
 
 providers:
   docker: {}
 
-accessLog: {}
+# accessLog: {}
+# <remote_IP_address> - <client_user_name_if_available> [<timestamp>] "<request_method> <request_path> <request_protocol>" <origin_server_HTTP_status> <origin_server_content_size> "<request_referrer>" "<request_user_agent>" <number_of_requests_received_since_Traefik_started> "<Traefik_frontend_name>" "<Traefik_backend_URL>" <request_duration_in_ms>ms 
 
-log:
-  filePath: "./traefik.log"
+# <remote_IP_address> - <client_user_name_if_available> [<timestamp>]                "<request_method> <request_path> <request_protocol>" <origin_server_HTTP_status> <origin_server_content_size> "<request_referrer>" "<request_user_agent>" <number_of_requests_received_since_Traefik_started> "<Traefik_frontend_name>" "<Traefik_backend_URL>" <request_duration_in_ms>ms 
+# 192.168.80.1        -                               - [20/Nov/2019:15:35:48 +0000] "GET              /favicon.ico   HTTP/1.1"           504                         15 "-" "-" 6 "phpmyadmin@docker" "http://192.168.144.2:80" 30001ms
 
-serversTransport:
-  insecureSkipVerify: true
-  # rootCAs:
-  #   - /mycert.cert
 
-tls:
-  certificates:
-    - certFile: /cert/bladehq.com.crt
-      keyFile: /cert/bladehq.com.key
 
-# Latency Check
-http:
-  middlewares:
-    latency-check:
-      circuitBreaker:
-        expression: "LatencyAtQuantileMS(50.0) > 100"
+# log:
+#   filePath: "./traefik.log"
+
+# Not sure if this is actually working
+# serversTransport:
+  # insecureSkipVerify: true
+
+# Not sure if this is actually working
+# tls:
+  # certificates:
+    # - certFile: /cert/bladehq.com.crt
+      # keyFile: /cert/bladehq.com.key
+
+# Not sure if this is working
+# http:
+#   middlewares:
+#     latency-check:
+#       circuitBreaker:
+#         expression: "LatencyAtQuantileMS(50.0) > 100"
