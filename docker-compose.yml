@@ -10,61 +10,86 @@ services:
       - 80:80
       - 443:443
       - 1313:1313
+      - 8080:8080
+    # networks:
+    #   - proxy
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./traefik.yml:/etc/traefik/traefik.yml
       # - /opt/traefik/certs/:/certs/
       # - ./certs/:/certs/
       # - ./traefik.log:/etc/traefik/traefik.log
+    command:
+      - --api.insecure # Don't do that in production
 
 
       ## TODO: figure out way to push up modules, (docker hub repo?)
 
   # Restart container, whithout restarting traefik: `docker-compose up -d whoami`
-  whoami:
-    image: containous/whoami
-    labels:
-      - "traefik.http.routers.whoami.rule=Host(`whoami.jlwarren1.com`) || Path(`/whoami`)"
-      - traefik.http.routers.whoami.entryPoints=web
-      # - traefik.http.services.whoami.loadbalancer.server.port=80
-  
-  gotify:
-    image: gotify/server
-    volumes:
-      - ./gotify/data:/app/data
-    labels:
-      - "traefik.http.routers.gotify.rule=Host(`gotify.jlwarren1.com`)"
-      - traefik.http.routers.gotify.entryPoints=web
-      - traefik.http.services.gotify.loadbalancer.server.port=80
+  # whoami:
+  #   image: containous/whoami
+  #   labels:
+  #     - traefik.http.routers.whoami.rule=Host(`whoami.jlwarren1.com`) || Path(`/whoami`)
+  #     - traefik.http.routers.whoami.entryPoints=web
+  #     - traefik.http.services.whoami.loadbalancer.server.port=80
 
+  whoami2:
+    image: containous/whoami
+    command:
+      - --port=8085 # Our service listens on 8082
+    labels:
+      - traefik.http.routers.whoami2.rule=Host(`whoami2.jlwarren1.com`) || Path(`/.whoami-2`)
+      - traefik.http.services.whoami2.loadbalancer.server.port=8085
+      # - traefik.http.routers.whoami.entryPoints=web
+  
   keybase:
     image: keybase
-    build: 
-        context: ./keybase
-        # dockerfile: ./keybase/Dockerfile
-        args:
-            LISTEN_PORT: "8080"
-    volumes:
-      - ./keybase/static:/go/bin/static
+    # build: 
+    #     context: ./keybase
+    command:
+      - --port=8082 # Our service listens on 8082
+    # ports:
+    #   - 8080:8080
+    # volumes:
+    #   - ./keybase/static:/go/bin/static
+    # networks:
+    #   - proxy
     labels:
-      - "traefik.http.routers.keybase.rule=Path(`/.well-known`)"
-      - traefik.http.routers.keybase.entryPoints=web
-      - traefik.http.services.keybase.loadbalancer.server.port=8080
+      # - traefik.http.routers.keybase.rule=Path(`/.well-known`)
+      - traefik.http.routers.keybase.rule=Host(`keybase.jlwarren1.com`) || Path(`/.well-known`)
+      - traefik.http.services.keybase.loadbalancer.server.port=8082
+      # - traefik.http.routers.keybase.service=keybase # <-----
+      # - traefik.http.routers.keybase.entryPoints=web
+      # - "traefik.docker.network=proxy"
+
+  # gotify:
+  #   image: gotify/server
+  #   volumes:
+  #     - ./gotify/data:/app/data
+  #   labels:
+  #     - "traefik.http.routers.gotify.rule=Host(`gotify.jlwarren1.com`)"
+  #     - traefik.http.routers.gotify.entryPoints=web
+  #     - traefik.http.services.gotify.loadbalancer.server.port=80
   
-  hugo:
-    image: gohugoio/hugo
-    labels:
-      - traefik.http.routers.blog.rule=Host(`test.jlwarren1.com`, `blog.jlwarren1.com`, `jlwarren1.com:1313`) || Path(`/blog`)
-      - traefik.http.routers.blog.entryPoints=web
-      - traefik.http.services.blog.loadbalancer.server.port=1313
-    # commands:https://gohugo.io/commands/hugo/
-    command: server --bind 0.0.0.0
-      --baseURL=blog.jlwarren1.com
-      --source /srv/hugo
-      --theme hyde
-      --buildDrafts
-      --watch
-      --appendPort=false
-      --disableLiveReload=true
-    volumes:
-      - ./blog/site:/srv/hugo
+  # hugo:
+  #   image: gohugoio/hugo
+  #   labels:
+  #     - traefik.http.routers.blog.rule=Host(`test.jlwarren1.com`, `blog.jlwarren1.com`, `jlwarren1.com:1313`) || Path(`/blog`)
+  #     - traefik.http.routers.blog.entryPoints=web
+  #     - traefik.http.services.blog.loadbalancer.server.port=1313
+  #   # commands:https://gohugo.io/commands/hugo/
+  #   command: server --bind 0.0.0.0
+  #     --baseURL=blog.jlwarren1.com
+  #     --source /srv/hugo
+  #     --theme hyde
+  #     --buildDrafts
+  #     --watch
+  #     --appendPort=false
+  #     --disableLiveReload=true
+  #   volumes:
+  #     - ./blog/site:/srv/hugo
+
+
+# networks:
+#   proxy:
+#     external: true
