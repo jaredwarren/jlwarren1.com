@@ -5,13 +5,11 @@ entryPoints:
    address: ":80"
   websecure:
     address: ":443"
-  # web-test:
-  #  address: ":8081"
   blog:
    address: ":1313"
 
 # TODO: remove for production, or secure
-api:
+# api:
   # insecure: true # http://localhost:8081/api/rawdata
   # dashboard: true # http://localhost:8081/dashboard/#/
 
